@@ -9,9 +9,9 @@ namespace wederds.ViewModel
 {
     public class WeatherVM: INotifyPropertyChanged
     {
-        private int query;
+        private string query;
 
-        public int Query
+        public string Query
         {
             get { return query; }
             set 
