@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wederds.Model;
+using wederds.Model.ViewModel.Helpers;
 
 namespace wederds.ViewModel
 {
@@ -44,6 +45,35 @@ namespace wederds.ViewModel
                 selectedCity = value;
                 OnPropertyChanged("SelectedCity");
             }
+        }
+
+        public WeatherVM() 
+        {
+            if(DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                SelectedCity = new City()
+                {
+                    LocalizedName = "New York"
+                };
+                CurrentConditions = new CurrentConditions()
+                {
+                    WeatherText = "Rainy",
+                    Temperature = new Temperature
+                    {
+                        Metric = new Units
+                        {
+                            Value = 21
+                        }
+                    }
+                };
+
+            }
+           
+        }
+
+        public async void MakeQuery()
+        {
+            var cities = await AccuWeatherHelper.GetCities(Query);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
